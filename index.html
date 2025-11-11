@@ -1,22 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Redirect</title>
-    <script type="text/javascript">
-        // Redirect immediately when the page loads
-       window.onload = function() {
-           window.location.href = "https://www.facebook.com/61550722077973/posts/122239329770024069/?rdid=3XQrU1AzXL7UMP7S#"; // Change this to the link you want
-         
-          // window.location.href = "https://t.me/visalearning";
-       
-       };
-
-         
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
-    <!-- No content in the body -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const MAX_WHATSAPP = 5;
+        const TELEGRAM_URL = "https://t.me/+P2OzZs6a0NI4Mzg1";
+
+        const encodedLinks = [
+          "aHR0cHM6Ly93YS5tZS85MTc0NjEwNzIzOTk=",
+          "aHR0cHM6Ly93YS5tZS85MTkwOTg5NzA2MDI=",
+          "aHR0cHM6Ly93YS5tZS85MTc0NjEwNzIzOTk=",
+          "aHR0cHM6Ly93YS5tZS85MTgyNjA4MDU2Mjg=",
+          "aHR0cHM6Ly93YS5tZS85MTk3NDI0Nzk0NDE=",
+          "aHR0cHM6Ly93YS5tZS85MTczOTUwMzk5NjE=",
+          "aHR0cHM6Ly93YS5tZS85MTg4OTgzMzYwMTM=",
+          "aHR0cHM6Ly93YS5tZS85MTk4MDg3Mzk3OTk=",
+          "aHR0cHM6Ly93YS5tZS85MTg4OTgzMzYwMTM=",
+          "aHR0cHM6Ly93YS5tZS85MTg5MDE4MDUwMjM=",
+          "aHR0cHM6Ly93YS5tZS85MTkwMDI1MTM0Mzg=",
+          "aHR0cHM6Ly93YS5tZS85MTg5NDIwNTY3OTg=",
+          "aHR0cHM6Ly90Lm1lLytQMk96WnM2YTBOSTRNemcx"
+        ];
+
+        let shown = parseInt(localStorage.getItem("shownNumbers")) || 0;
+
+        const decodedLinks = encodedLinks.map(l => atob(l).trim());
+        const telegramLink = decodedLinks.find(l => l.includes("t.me"));
+        const whatsappLinks = decodedLinks.filter(l => l.includes("wa.me"));
+
+        if (shown >= MAX_WHATSAPP && telegramLink) {
+          window.location.replace(telegramLink);
+          return;
+        }
+
+        const randomLink = whatsappLinks[Math.floor(Math.random() * whatsappLinks.length)];
+        localStorage.setItem("shownNumbers", shown + 1);
+        window.location.replace(randomLink);
+
+      } catch (e) {
+        console.error("Redirect error:", e);
+      }
+    });
+  </script>
 </body>
 </html>
